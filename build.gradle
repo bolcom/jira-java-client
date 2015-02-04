@@ -1,0 +1,90 @@
+import static org.gradle.api.JavaVersion.VERSION_1_7
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven'
+apply from: script('integrationTest')
+
+sourceCompatibility = VERSION_1_7
+targetCompatibility = VERSION_1_7
+
+group = 'com.bol.jira'
+
+ext {
+    libraries = [:]
+    versions = [:]
+}
+
+versions += [
+        feign    : '6.1.1',
+        slf4j    : '1.7.6',
+        logback  : '1.1.2',
+        groovy   : '2.3.8',
+        commonsIo: '2.4',
+        jodaTime : '2.7',
+]
+
+libraries += [
+        junit     : 'junit:junit:4.11',
+        groovy    : "org.codehaus.groovy:groovy:${versions.groovy}",
+        commonsIo : "commons-io:commons-io:${versions.commonsIo}",
+        loggingApi: "org.slf4j:slf4j-api:${versions.slf4j}",
+        jodaTime  : "joda-time:joda-time:${versions.jodaTime}",
+]
+
+libraries.feign = [
+        "com.netflix.feign:feign-core:${versions.feign}",
+        "com.netflix.feign:feign-jackson:${versions.feign}",
+        "com.netflix.feign:feign-jaxrs:${versions.feign}",
+]
+
+libraries.logging = [
+        "org.slf4j:jcl-over-slf4j:${versions.slf4j}",
+        "ch.qos.logback:logback-classic:${versions.logback}",
+]
+
+libraries.spock = ['org.spockframework:spock-core:0.7-groovy-2.0',
+                   libraries.groovy,
+                   'org.objenesis:objenesis:2.0',
+                   'cglib:cglib-nodep:2.2',
+]
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Jira Java Client', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile libraries.feign
+    compile libraries.loggingApi
+    compile libraries.jodaTime
+
+    testCompile libraries.commonsIo
+    testCompile libraries.junit
+    testCompile libraries.spock
+    testRuntime libraries.logging
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+File script(String name) {
+    project.file("gradle/${name}.gradle")
+}
