@@ -4,7 +4,7 @@ Java Client for Atlassian Jira
 A *not complete* Java client for Atlassian Jira. Currently we extend it with
 only what we need, but we happily apply your pull-request :D
 
-Most of the Jira REST APIs are supported by the (official?) [Atlassian Jira REST Java Client](https://ecosystem.atlassian.net/wiki/display/JRJC/Home]
+Most of the Jira REST APIs are supported by the (official?) [Atlassian Jira REST Java Client](https://ecosystem.atlassian.net/wiki/display/JRJC/Home)
 
 Basic usage
 -----------
