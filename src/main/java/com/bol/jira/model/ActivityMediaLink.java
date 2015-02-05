@@ -40,4 +40,39 @@ public class ActivityMediaLink {
     public void setDuration(int duration) {
         this.duration = duration;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ActivityMediaLink that = (ActivityMediaLink) o;
+
+        if (duration != that.duration) return false;
+        if (height != that.height) return false;
+        if (width != that.width) return false;
+        if (url != null ? !url.equals(that.url) : that.url != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = url != null ? url.hashCode() : 0;
+        result = 31 * result + height;
+        result = 31 * result + width;
+        result = 31 * result + duration;
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("ActivityMediaLink{");
+        sb.append("url='").append(url).append('\'');
+        sb.append(", height=").append(height);
+        sb.append(", width=").append(width);
+        sb.append(", duration=").append(duration);
+        sb.append('}');
+        return sb.toString();
+    }
 }

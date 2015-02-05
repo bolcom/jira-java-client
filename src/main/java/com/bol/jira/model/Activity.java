@@ -125,4 +125,66 @@ public class Activity {
     public void setVerb(String verb) {
         this.verb = verb;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Activity activity = (Activity) o;
+
+        if (actor != null ? !actor.equals(activity.actor) : activity.actor != null) return false;
+        if (content != null ? !content.equals(activity.content) : activity.content != null) return false;
+        if (generator != null ? !generator.equals(activity.generator) : activity.generator != null) return false;
+        if (icon != null ? !icon.equals(activity.icon) : activity.icon != null) return false;
+        if (id != null ? !id.equals(activity.id) : activity.id != null) return false;
+        if (object != null ? !object.equals(activity.object) : activity.object != null) return false;
+        if (provider != null ? !provider.equals(activity.provider) : activity.provider != null) return false;
+        if (published != null ? !published.equals(activity.published) : activity.published != null) return false;
+        if (target != null ? !target.equals(activity.target) : activity.target != null) return false;
+        if (title != null ? !title.equals(activity.title) : activity.title != null) return false;
+        if (updated != null ? !updated.equals(activity.updated) : activity.updated != null) return false;
+        if (url != null ? !url.equals(activity.url) : activity.url != null) return false;
+        if (verb != null ? !verb.equals(activity.verb) : activity.verb != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = actor != null ? actor.hashCode() : 0;
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (generator != null ? generator.hashCode() : 0);
+        result = 31 * result + (icon != null ? icon.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
+        result = 31 * result + (object != null ? object.hashCode() : 0);
+        result = 31 * result + (published != null ? published.hashCode() : 0);
+        result = 31 * result + (provider != null ? provider.hashCode() : 0);
+        result = 31 * result + (target != null ? target.hashCode() : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (updated != null ? updated.hashCode() : 0);
+        result = 31 * result + (url != null ? url.hashCode() : 0);
+        result = 31 * result + (verb != null ? verb.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Activity{");
+        sb.append("actor=").append(actor);
+        sb.append(", content='").append(content).append('\'');
+        sb.append(", generator=").append(generator);
+        sb.append(", icon=").append(icon);
+        sb.append(", id=").append(id);
+        sb.append(", object=").append(object);
+        sb.append(", published=").append(published);
+        sb.append(", provider=").append(provider);
+        sb.append(", target=").append(target);
+        sb.append(", title='").append(title).append('\'');
+        sb.append(", updated=").append(updated);
+        sb.append(", url='").append(url).append('\'');
+        sb.append(", verb='").append(verb).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
