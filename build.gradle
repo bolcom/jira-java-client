@@ -65,6 +65,8 @@ dependencies {
     compile libraries.loggingApi
     compile libraries.jodaTime
 
+    testCompile "com.bol.feign:feign-client-provider:0.3"
+
     testCompile libraries.commonsIo
     testCompile libraries.junit
     testCompile libraries.spock

@@ -1,5 +1,6 @@
 package com.bol.jira
 
+import com.bol.feign.FeignClientProvider
 import com.bol.jira.logging.Slf4JLogger
 import com.bol.jira.model.Activity
 import com.bol.jira.model.ActivityMediaLink
@@ -25,11 +26,10 @@ class JiraClientIntegrationSpec extends Specification {
     def jiraUser = System.getenv('JIRA_USER')
     def jiraPassword = System.getenv('JIRA_PASSWORD')
 
-    def "Just try stuff out"() {
-        def client = new JiraClient(jiraUrl)
+    def "running a test method using the 'feign-client-provider'"() {
+        def client = new FeignClientProvider(jiraUrl)
         client.withFakeSSL()
         client.authenticated(jiraUser, jiraPassword)
-        client.withLogger(new Slf4JLogger(), Logger.Level.FULL)
         def api = client.createClient()
 
         def activity = createActivity()
